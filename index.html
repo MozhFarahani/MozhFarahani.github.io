@@ -106,6 +106,7 @@ p{margin:0;max-width:66ch}
 .pubs .a strong{color:var(--ink);font-weight:600}
 .pubs .j{font-size:.93rem;font-style:italic}
 .pubs .doi{font-family:var(--mono);font-size:.74rem;word-break:break-all}
+.pubs li > div > .doi + .doi{margin-left:2px}
 /* code */
 .code{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .repo{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
@@ -219,7 +220,7 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
             <h3>ML-based calibration of a large-domain hydrology model</h3>
             <p>An AI-driven calibration workflow for the SUMMA process-based hydrology model. Machine-learning emulators are coupled with genetic-algorithm optimization (NSGA-II) to search high-dimensional parameter spaces across 627 CAMELS basins, refining estimates through successive emulator-guided model runs. Median streamflow accuracy (KGE′) rose from 0.30 to 0.76, compared with 0.69 for per-basin calibration, and spatial cross-validation tested how well the approach regionalizes to unseen basins.</p>
             <p>The framework now extends to the larger CAMELS-X dataset with an improved optimization strategy, a global emulator, and a complementary regional emulator trained with federated learning (manuscript in preparation).</p>
-            <div class="meta"><span class="tag">Emulators</span><span class="tag">NSGA-II</span><span class="tag">Federated learning</span><a href="https://doi.org/10.5194/hess-29-4515-2025" target="_blank" rel="noopener">Paper →</a></div>
+            <div class="meta"><span class="tag">Emulators</span><span class="tag">NSGA-II</span><span class="tag">Federated learning</span><a href="https://doi.org/10.5194/hess-29-4515-2025" target="_blank" rel="noopener">Paper →</a><a href="https://github.com/MozhganFarahani/lse_landhydro" target="_blank" rel="noopener">Code →</a></div>
           </div>
         </article>
         <article class="proj" data-tags="ml hpc">
@@ -260,7 +261,7 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           <div>
             <h3>Causal drivers of land–atmosphere carbon fluxes</h3>
             <p>PhD research combining machine learning (linear regression, random forests, LSTM networks) and process-based models with large flux-tower time series. Information-theoretic causal analysis tests whether each model captures the right input–output relationships, not only predictive accuracy.</p>
-            <div class="meta"><span class="tag">LSTM</span><span class="tag">Random forest</span><span class="tag">Causal analysis</span><a href="https://doi.org/10.1029/2023JG007815" target="_blank" rel="noopener">Paper →</a></div>
+            <div class="meta"><span class="tag">LSTM</span><span class="tag">Random forest</span><span class="tag">Causal analysis</span><a href="https://doi.org/10.1029/2023JG007815" target="_blank" rel="noopener">Paper →</a><a href="https://github.com/MozhganFarahani/Farahani_CarbonML2023" target="_blank" rel="noopener">Code →</a></div>
           </div>
         </article>
         <article class="proj" data-tags="it">
@@ -268,7 +269,15 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           <div>
             <h3>How much input precision does a model use?</h3>
             <p>A rate-distortion-theory method that quantizes model input time series to measure how much precision a model actually uses. Inputs can often be simplified without significantly reducing model performance.</p>
-            <div class="meta"><span class="tag">Rate-distortion theory</span><a href="https://doi.org/10.3390/e24070994" target="_blank" rel="noopener">Paper →</a></div>
+            <div class="meta"><span class="tag">Rate-distortion theory</span><a href="https://doi.org/10.3390/e24070994" target="_blank" rel="noopener">Paper →</a><a href="https://github.com/allisongoodwell/Farahani_RateDistortion_Codes_Github" target="_blank" rel="noopener">Code →</a></div>
+          </div>
+        </article>
+        <article class="proj" data-tags="it">
+          <div class="when">WRR 2020</div>
+          <div>
+            <h3>Information flows from precipitation to streamflow</h3>
+            <p>Information transfers from daily precipitation at locations across the Colorado Headwaters Basin to streamflow at the outlet, using 65 years of data. The analysis identifies critical precipitation thresholds, lag times, and seasonal shifts in how the basin responds.</p>
+            <div class="meta"><span class="tag">Transfer entropy</span><span class="tag">Streamflow</span><a href="https://doi.org/10.1029/2019WR026133" target="_blank" rel="noopener">Paper →</a><a href="https://github.com/allisongoodwell/Franzen_InfoFlows_2020" target="_blank" rel="noopener">Code →</a></div>
           </div>
         </article>
         <article class="proj" data-tags="tools hpc">
@@ -358,22 +367,22 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           <div class="t">Calibrating a large-domain land/hydrology process model in the age of AI: the SUMMA CAMELS emulator experiments</div>
           <div class="a"><strong>Farahani, M. A.</strong>, Wood, A. W., Tang, G., Mizukami, N.</div>
           <div class="j">Hydrology and Earth System Sciences, 29(18), 4515–4537</div>
-          <a class="doi" href="https://doi.org/10.5194/hess-29-4515-2025" target="_blank" rel="noopener">doi:10.5194/hess-29-4515-2025</a></div></li>
+          <a class="doi" href="https://doi.org/10.5194/hess-29-4515-2025" target="_blank" rel="noopener">doi:10.5194/hess-29-4515-2025</a> · <a class="doi" href="https://github.com/MozhganFarahani/lse_landhydro" target="_blank" rel="noopener">code</a></div></li>
         <li><span class="yr">2024</span><div>
           <div class="t">Causal drivers of land–atmosphere carbon fluxes from machine learning models and data</div>
           <div class="a"><strong>Farahani, M. A.</strong>, Goodwell, A. E.</div>
           <div class="j">Journal of Geophysical Research: Biogeosciences, 129(6), e2023JG007815</div>
-          <a class="doi" href="https://doi.org/10.1029/2023JG007815" target="_blank" rel="noopener">doi:10.1029/2023JG007815</a></div></li>
+          <a class="doi" href="https://doi.org/10.1029/2023JG007815" target="_blank" rel="noopener">doi:10.1029/2023JG007815</a> · <a class="doi" href="https://github.com/MozhganFarahani/Farahani_CarbonML2023" target="_blank" rel="noopener">code</a></div></li>
         <li><span class="yr">2022</span><div>
           <div class="t">Evaluating ecohydrological model sensitivity to input variability with an information-theory-based approach</div>
           <div class="a"><strong>Farahani, M. A.</strong>, Vahid, A., Goodwell, A. E.</div>
           <div class="j">Entropy, 24(7), 994</div>
-          <a class="doi" href="https://doi.org/10.3390/e24070994" target="_blank" rel="noopener">doi:10.3390/e24070994</a></div></li>
+          <a class="doi" href="https://doi.org/10.3390/e24070994" target="_blank" rel="noopener">doi:10.3390/e24070994</a> · <a class="doi" href="https://github.com/allisongoodwell/Farahani_RateDistortion_Codes_Github" target="_blank" rel="noopener">code</a></div></li>
         <li><span class="yr">2020</span><div>
           <div class="t">Information flows: characterizing precipitation–streamflow dependencies in the Colorado Headwaters with an information theory approach</div>
           <div class="a">Franzen, S. E., <strong>Farahani, M. A.</strong>, Goodwell, A. E.</div>
           <div class="j">Water Resources Research, 56(10), e2019WR026133</div>
-          <a class="doi" href="https://doi.org/10.1029/2019WR026133" target="_blank" rel="noopener">doi:10.1029/2019WR026133</a></div></li>
+          <a class="doi" href="https://doi.org/10.1029/2019WR026133" target="_blank" rel="noopener">doi:10.1029/2019WR026133</a> · <a class="doi" href="https://github.com/allisongoodwell/Franzen_InfoFlows_2020" target="_blank" rel="noopener">code</a></div></li>
         <li><span class="yr">2018</span><div>
           <div class="t">Examining the influence of data uncertainty and hydraulic simulation method on the results of modeling and performance evaluation of water distribution networks</div>
           <div class="a"><strong>Farahani, M. A.</strong>, Tabesh, M., Shirzad, A.</div>
@@ -400,7 +409,31 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           <span class="lang">Personal</span>
         </div>
         <div class="repo">
-          <span class="path">github.com/NCAR/pyTIER</span>
+          <span class="path">MozhganFarahani/lse_landhydro</span>
+          <p>Emulator-based calibration of the SUMMA hydrology model across CAMELS basins.</p>
+          <a href="https://github.com/MozhganFarahani/lse_landhydro" target="_blank" rel="noopener">View repository →</a>
+          <span class="lang">Code for HESS 2025</span>
+        </div>
+        <div class="repo">
+          <span class="path">MozhganFarahani/Farahani_CarbonML2023</span>
+          <p>Information-flow analysis of carbon flux drivers in machine-learning models and flux-tower data.</p>
+          <a href="https://github.com/MozhganFarahani/Farahani_CarbonML2023" target="_blank" rel="noopener">View repository →</a>
+          <span class="lang">Code for JGR Biogeosciences 2024</span>
+        </div>
+        <div class="repo">
+          <span class="path">allisongoodwell/Farahani_RateDistortion_Codes_Github</span>
+          <p>Rate-distortion quantization of model inputs to test ecohydrological model sensitivity.</p>
+          <a href="https://github.com/allisongoodwell/Farahani_RateDistortion_Codes_Github" target="_blank" rel="noopener">View repository →</a>
+          <span class="lang">Code for Entropy 2022</span>
+        </div>
+        <div class="repo">
+          <span class="path">allisongoodwell/Franzen_InfoFlows_2020</span>
+          <p>Information flows from precipitation to streamflow in the Colorado Headwaters.</p>
+          <a href="https://github.com/allisongoodwell/Franzen_InfoFlows_2020" target="_blank" rel="noopener">View repository →</a>
+          <span class="lang">Code for WRR 2020</span>
+        </div>
+        <div class="repo">
+          <span class="path">NCAR/pyTIER</span>
           <p>Topographically InformEd Regression for gridding station precipitation and temperature, in Python.</p>
           <a href="https://github.com/NCAR/pyTIER" target="_blank" rel="noopener">View repository →</a>
           <span class="lang">Python · also archived on Zenodo</span>
@@ -410,11 +443,6 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           <p>Case-creation scripts, configuration archive, evaluation pipeline, and automated tests for the CONUS experiments.</p>
           <a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project page →</a>
           <span class="lang">Python · Xarray · Dask · PBS</span>
-        </div>
-        <div class="repo todo">
-          <span class="path">Coming next</span>
-          <p>Repositories for the emulator calibration workflow and the gauge diagnostics dashboards, once they are public.</p>
-          <span class="lang">Placeholder: add links when released</span>
         </div>
       </div>
     </section>
