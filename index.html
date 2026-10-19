@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Mozhgan A. Farahani: hydrology, land modeling and machine learning research at NCAR.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Mozhgan A. Farahani</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky left index (name + section links) beside a single reading column; stacks on phones. Motif: a water-year hydrograph. */
+:root{
+  --bg:#f3f6f6;
+  --surface:#ffffff;
+  --ink:#16252b;
+  --muted:#53666d;
+  --rule:#d5dfe1;
+  --river:#1d6b80;
+  --river-soft:#d7e9ee;
+  --silt:#a8742a;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f181b; --surface:#152227; --ink:#e3ecee; --muted:#9db0b6; --rule:#28393f;
+    --river:#6fbfd4; --river-soft:#1b343c; --silt:#d9a75e; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f181b; --surface:#152227; --ink:#e3ecee; --muted:#9db0b6; --rule:#28393f;
+  --river:#6fbfd4; --river-soft:#1b343c; --silt:#d9a75e; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+a{color:var(--river);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--silt);outline-offset:3px;border-radius:3px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:56px;padding-block:48px 80px}
+/* index */
+.index{position:sticky;top:calc(env(safe-area-inset-top,0px) + 32px);align-self:start;display:flex;flex-direction:column;gap:22px}
+.index .name{font-family:var(--display);font-weight:700;font-size:1.35rem;line-height:1.2}
+.index .role{font-family:var(--mono);font-size:.74rem;color:var(--muted);letter-spacing:.02em;line-height:1.5}
+.index nav{display:flex;flex-direction:column;gap:2px;border-left:1px solid var(--rule)}
+.index nav a{font-family:var(--display);font-size:.92rem;color:var(--muted);text-decoration:none;padding:5px 0 5px 14px;margin-left:-1px;border-left:2px solid transparent}
+.index nav a:hover,.index nav a.on{color:var(--ink);border-left-color:var(--river)}
+.links{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--mono);font-size:.76rem}
+main{min-width:0;display:flex;flex-direction:column;gap:72px}
+section{scroll-margin-top:24px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--silt);margin-bottom:10px}
+h2{font-size:1.7rem;font-weight:700;margin-bottom:22px}
+p{margin:0;max-width:66ch}
+/* hero */
+.hero h1{font-size:clamp(2.1rem,5vw,3.3rem);font-weight:700;letter-spacing:-.01em;max-width:18ch}
+.hero h1 em{font-style:normal;color:var(--river)}
+.hero .lede{margin-top:20px;font-size:1.1rem;color:var(--ink)}
+.hydro{margin-top:30px;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px 18px 10px}
+.hydro svg{display:block;width:100%;height:auto}
+.hydro figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:6px}
+.figures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-top:18px}
+.figures div{background:var(--surface);padding:14px 16px}
+.figures b{display:block;font-family:var(--display);font-size:1.45rem;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.figures span{font-family:var(--mono);font-size:.7rem;color:var(--muted);line-height:1.4;display:block;margin-top:2px}
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.filters button{font-family:var(--mono);font-size:.75rem;background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:99px;padding:5px 12px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--river);border-color:var(--river);color:var(--bg)}
+.projects{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.proj{display:grid;grid-template-columns:130px minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--rule)}
+.proj .when{font-family:var(--mono);font-size:.75rem;color:var(--muted);padding-top:4px}
+.proj h3{font-size:1.18rem;font-weight:700}
+.proj p{margin-top:8px;color:var(--ink)}
+.proj .meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-family:var(--mono);font-size:.74rem;align-items:center}
+.tag{color:var(--river);background:var(--river-soft);padding:2px 8px;border-radius:3px}
+.status{font-family:var(--mono);font-size:.68rem;color:var(--silt);border:1px solid currentColor;border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:3px;white-space:nowrap}
+/* experience */
+.xp{display:flex;flex-direction:column;gap:30px}
+.job header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;align-items:baseline}
+.job h3{font-size:1.1rem;font-weight:700}
+.job .sub{font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:2px}
+.job .org{color:var(--muted);font-style:italic}
+.job .dates{font-family:var(--mono);font-size:.75rem;color:var(--muted);white-space:nowrap}
+.job ul{margin:10px 0 0;padding-left:1.1em;max-width:66ch}
+.job li{margin-top:5px}
+.job li::marker{color:var(--river)}
+.edu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:34px}
+.edu div{border-top:2px solid var(--river);padding-top:10px}
+.edu b{font-family:var(--display);display:block}
+.edu span{font-size:.92rem;color:var(--muted)}
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.skills h3{font-size:1rem;font-weight:700;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--mono);font-size:.74rem;border:1px solid var(--rule);background:var(--surface);border-radius:3px;padding:3px 8px}
+/* pubs */
+.pubs{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:20px}
+.pubs li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px}
+.pubs .yr{font-family:var(--mono);font-size:.8rem;color:var(--silt);padding-top:3px;font-variant-numeric:tabular-nums}
+.pubs .t{font-weight:600}
+.pubs .a{font-size:.93rem;color:var(--muted)}
+.pubs .a strong{color:var(--ink);font-weight:600}
+.pubs .j{font-size:.93rem;font-style:italic}
+.pubs .doi{font-family:var(--mono);font-size:.74rem;word-break:break-all}
+/* code */
+.code{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.repo{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.repo .path{font-family:var(--mono);font-size:.82rem;color:var(--river);word-break:break-all}
+.repo p{font-size:.95rem}
+.repo .lang{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:auto}
+.repo.todo{background:transparent;border-style:dashed;grid-column:1/-1}
+/* future */
+.ideas{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.idea{padding:20px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px}
+.idea h3{font-size:1.08rem;font-weight:700}
+.idea p{grid-column:1/-1;font-size:.98rem}
+.idea .who{font-family:var(--mono);font-size:.72rem;color:var(--muted);text-align:right;white-space:nowrap}
+.collab{margin-top:30px;background:var(--river-soft);border-radius:6px;padding:22px 24px}
+.collab h3{font-size:1.1rem;margin-bottom:10px}
+.collab ul{margin:0;padding-left:1.1em;max-width:66ch}
+.collab li{margin-top:4px}
+.note{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-top:14px;max-width:66ch}
+/* contact */
+.contact{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
+.row code{font-family:var(--mono);font-size:.9rem;background:var(--surface);border:1px solid var(--rule);padding:6px 10px;border-radius:4px;user-select:all;word-break:break-all}
+.btn{font-family:var(--mono);font-size:.78rem;background:var(--ink);color:var(--bg);border:0;border-radius:4px;padding:7px 12px;cursor:pointer}
+footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:18px}
+@media (max-width:980px){ .figures{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:860px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:36px;padding-block:28px 64px}
+  .index{position:static}
+  .index nav{flex-direction:row;flex-wrap:wrap;border-left:0;gap:4px 14px}
+  .index nav a{padding:2px 0;border-left:0;margin:0;border-bottom:2px solid transparent}
+  .index nav a.on{border-bottom-color:var(--river)}
+  .skills{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .proj,.pubs li{grid-template-columns:minmax(0,1fr);gap:4px}
+  .code,.edu{grid-template-columns:minmax(0,1fr)}
+  .idea{grid-template-columns:minmax(0,1fr)}
+  .idea .who{text-align:left}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:no-preference){
+  #flow{stroke-dasharray:var(--len);stroke-dashoffset:0;animation:draw 2.4s ease-out}
+  @keyframes draw{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <aside class="index">
+    <div>
+      <div class="name">Mozhgan A. Farahani</div>
+      <div class="role">Scientist III · Terrestrial Sciences<br>NCAR Climate &amp; Global Dynamics<br>Boulder, Colorado</div>
+    </div>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#publications">Publications</a>
+      <a href="#code">Code</a>
+      <a href="#future">Future work</a>
+      <a href="#personal">Personal</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="links">
+      <a href="https://github.com/MozhganFarahani" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://scholar.google.com/citations?user=ynosZ1MAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+      <a href="https://www.linkedin.com/in/mozhganafarahani/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </aside>
+
+  <main>
+    <section id="about" class="hero">
+      <div class="eyebrow">Hydrology · Land modeling · Machine learning</div>
+      <h1>Teaching process models to learn from <em>every river gauge</em> in the country.</h1>
+      <p class="lede">I am an applied machine learning scientist at the National Center for Atmospheric Research. I combine machine learning with physics-based models: ML emulators that calibrate large-domain hydrology models, federated learning across regions, and information theory to test whether a model captures the right relationships and not only good scores. I take that research from idea to scalable, reproducible code on HPC, and my methods are now used in multi-agency projects. This page collects my research, code, publications, and the work I want to do next.</p>
+
+      <figure class="hydro">
+        <svg id="hydro" viewBox="0 0 720 170" role="img" aria-label="Illustrative snowmelt-driven hydrograph across a water year, October to September, peaking in late spring">
+          <g id="grid"></g>
+          <path id="fill" fill="var(--river-soft)" stroke="none"></path>
+          <path id="flow" fill="none" stroke="var(--river)" stroke-width="2"></path>
+          <g id="axis" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--muted)"></g>
+        </svg>
+        <figcaption>Illustrative snowmelt hydrograph, one water year (Oct–Sep). Most of my work is about getting a model to reproduce curves like this one at thousands of gauges.</figcaption>
+      </figure>
+
+      <div class="figures">
+        <div><b>0.30 → 0.76</b><span>median KGE′ across 627 CAMELS basins after emulator calibration</span></div>
+        <div><b>~97,000</b><span>HUC12 subbasins calibrated for CMIP6 LOCA2 projections</span></div>
+        <div><b>2,200+</b><span>stream gauges scored in the CTSM-CONUS evaluation</span></div>
+        <div><b>227,000</b><span>river reaches in the 12 km CONUS routing network</span></div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="eyebrow">Selected work</div>
+      <h2>Research &amp; projects</h2>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+        <button type="button" data-f="ml">Machine learning</button>
+        <button type="button" data-f="hpc">HPC &amp; large-domain</button>
+        <button type="button" data-f="it">Information theory</button>
+        <button type="button" data-f="tools">Tools &amp; dashboards</button>
+      </div>
+      <div class="projects" id="projlist">
+        <article class="proj" data-tags="ml">
+          <div class="when">HESS 2025</div>
+          <div>
+            <h3>ML-based calibration of a large-domain hydrology model</h3>
+            <p>An AI-driven calibration workflow for the SUMMA process-based hydrology model. Machine-learning emulators are coupled with genetic-algorithm optimization (NSGA-II) to search high-dimensional parameter spaces across 627 CAMELS basins, refining estimates through successive emulator-guided model runs. Median streamflow accuracy (KGE′) rose from 0.30 to 0.76, compared with 0.69 for per-basin calibration, and spatial cross-validation tested how well the approach regionalizes to unseen basins.</p>
+            <p>The framework now extends to the larger CAMELS-X dataset with an improved optimization strategy, a global emulator, and a complementary regional emulator trained with federated learning (manuscript in preparation).</p>
+            <div class="meta"><span class="tag">Emulators</span><span class="tag">NSGA-II</span><span class="tag">Federated learning</span><a href="https://doi.org/10.5194/hess-29-4515-2025" target="_blank" rel="noopener">Paper →</a></div>
+          </div>
+        </article>
+        <article class="proj" data-tags="ml hpc">
+          <div class="when">Current</div>
+          <div>
+            <h3>CMIP6 LOCA2 streamflow projections <span class="status">Ongoing</span></h3>
+            <p>A multi-agency effort with the Bureau of Reclamation and the U.S. Army Corps of Engineers. I lead the calibration workstream: an end-to-end HPC pipeline that uses the trained emulators to generate parameters for ~97,000 HUC12 subbasins across the contiguous US, runs large simulation ensembles, and automates parameter selection gauge by gauge through the river network. I coordinate region-by-region delivery to partners.</p>
+            <div class="meta"><span class="tag">SUMMA</span><span class="tag">HPC pipelines</span><span class="tag">Ensembles</span></div>
+          </div>
+        </article>
+        <article class="proj" data-tags="hpc tools">
+          <div class="when">2026</div>
+          <div>
+            <h3>CTSM-CONUS: high-resolution land and river modeling</h3>
+            <p>A high-resolution CTSM hydrology evaluation and community baseline dataset for the contiguous US. It couples the Community Terrestrial Systems Model (CTSM 5.4) with the mizuRoute river model on a 0.125° (~12 km) grid of 224 × 464 cells, with 227,000 river reaches and 38 water years, to isolate how irrigation, evolving land cover, hillslope hydrology, and prognostic phenology affect streamflow.</p>
+            <p>A parallel Python pipeline scores five model configurations against 2,200+ stream gauges (NSE, KGE, percent bias) by region. I built the project website, an interactive dashboard of gauge maps, time series, seasonal climatologies, and configuration differences, and an online technical note. Case-creation scripts, the configuration archive, and automated tests are released as an open-source repository. Funded by an NCAR CGD Science Innovation Fund (SIF-T) award.</p>
+            <div class="meta"><span class="tag">CTSM</span><span class="tag">mizuRoute</span><span class="tag">Xarray · Dask</span><a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project site →</a></div>
+          </div>
+        </article>
+        <article class="proj" data-tags="tools">
+          <div class="when">Current</div>
+          <div>
+            <h3>Gauge diagnostics dashboards</h3>
+            <p>A Python and Plotly tool that turns HPC model output into interactive diagnostics: CAMELS-X benchmarking, streamflow signatures, and automated failure flags. The project team uses it to find and diagnose poorly performing gauges.</p>
+            <div class="meta"><span class="tag">Plotly</span><span class="tag">Python</span></div>
+          </div>
+        </article>
+        <article class="proj" data-tags="it">
+          <div class="when">NASA-funded</div>
+          <div>
+            <h3>Sub-seasonal to seasonal hydrologic predictability</h3>
+            <p>Information-theory metrics that quantify sub-seasonal to seasonal hydrologic predictability. I also supplied the model calibration behind the project's particle-filter data assimilation study.</p>
+            <div class="meta"><span class="tag">Information theory</span><span class="tag">Data assimilation</span><a href="#publications">WRR 2026 →</a></div>
+          </div>
+        </article>
+        <article class="proj" data-tags="ml it">
+          <div class="when">JGR-B 2024</div>
+          <div>
+            <h3>Causal drivers of land–atmosphere carbon fluxes</h3>
+            <p>PhD research combining machine learning (linear regression, random forests, LSTM networks) and process-based models with large flux-tower time series. Information-theoretic causal analysis tests whether each model captures the right input–output relationships, not only predictive accuracy.</p>
+            <div class="meta"><span class="tag">LSTM</span><span class="tag">Random forest</span><span class="tag">Causal analysis</span><a href="https://doi.org/10.1029/2023JG007815" target="_blank" rel="noopener">Paper →</a></div>
+          </div>
+        </article>
+        <article class="proj" data-tags="it">
+          <div class="when">Entropy 2022</div>
+          <div>
+            <h3>How much input precision does a model use?</h3>
+            <p>A rate-distortion-theory method that quantizes model input time series to measure how much precision a model actually uses. Inputs can often be simplified without significantly reducing model performance.</p>
+            <div class="meta"><span class="tag">Rate-distortion theory</span><a href="https://doi.org/10.3390/e24070994" target="_blank" rel="noopener">Paper →</a></div>
+          </div>
+        </article>
+        <article class="proj" data-tags="tools hpc">
+          <div class="when">2022</div>
+          <div>
+            <h3>pyTIER</h3>
+            <p>A Python port of the Topographically InformEd Regression station-interpolation model, rewritten from MATLAB for performance and scalability during the NCAR SIParCS internship and released open source on GitHub and Zenodo.</p>
+            <div class="meta"><span class="tag">Python</span><span class="tag">Open source</span><a href="https://github.com/NCAR/pyTIER" target="_blank" rel="noopener">GitHub →</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="eyebrow">Career</div>
+      <h2>Experience</h2>
+      <div class="xp">
+        <div class="job">
+          <header><h3>Scientist III</h3><span class="dates">Oct 2023 – present</span></header>
+          <div class="sub">Scientist III since Mar 2026 · Postdoctoral Fellow, Hydrology &amp; Land Modeling, Oct 2023 – Mar 2026</div>
+          <div class="org">National Center for Atmospheric Research (NCAR), Boulder, CO</div>
+          <ul>
+            <li>Developed ML-emulator calibration for the SUMMA hydrology model across 627 CAMELS basins, raising median KGE′ from 0.30 to 0.76 (first author, <i>HESS</i> 2025); extending it to CAMELS-X with global and federated emulators.</li>
+            <li>Lead the calibration workstream for CMIP6 LOCA2 streamflow projections with the Bureau of Reclamation and USACE, covering ~97,000 HUC12 subbasins.</li>
+            <li>Led the CTSM-CONUS high-resolution land and river modeling study, its evaluation pipeline, website, dashboard, and open-source release.</li>
+            <li>Quantified S2S hydrologic predictability with information-theory metrics for a NASA-funded project.</li>
+            <li>Peer reviewer for scientific journals and invited panelist for NASA proposal reviews.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <header><h3>Summer Intern in Parallel Computational Science (SIParCS)</h3><span class="dates">May – Aug 2022</span></header>
+          <div class="org">National Center for Atmospheric Research (NCAR), Boulder, CO</div>
+          <ul>
+            <li>Ported the TIER station-interpolation model from MATLAB to Python (pyTIER) and released it open source.</li>
+            <li>Applied information-theory methods to evaluate weather-station interpolation and analyzed large observational datasets.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <header><h3>Ph.D. Graduate Research Assistant</h3><span class="dates">Aug 2019 – Dec 2023</span></header>
+          <div class="org">University of Colorado Denver, Denver, CO</div>
+          <ul>
+            <li>Diagnosed drivers of land–atmosphere carbon and heat fluxes with ML, process-based models, and information-theoretic causal analysis (first author, <i>JGR Biogeosciences</i> 2024).</li>
+            <li>Developed a rate-distortion method to measure how much input precision a model uses (first author, <i>Entropy</i> 2022).</li>
+            <li>Characterized precipitation–streamflow information transfers over 65 years in the Colorado Headwaters (co-author, <i>WRR</i> 2020).</li>
+            <li>President of the CINet Junior Scientist Council; mentored an NGRREC undergraduate intern on ECOSTRESS evapotranspiration data; graduate instructor for Computational Methods for Civil Engineers.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <header><h3>Technical and Business Development Expert</h3><span class="dates">May 2014 – Jul 2019</span></header>
+          <div class="org">ARSA International Construction Company, Tehran, Iran</div>
+          <ul>
+            <li>Estimated cost, schedule, materials, and labor for construction tender proposals; coordinated engineers, clients, and subcontractors and managed communication with international clients.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="edu">
+        <div><b>Ph.D., Civil Engineering Systems</b><span>University of Colorado Denver · 2019–2023</span></div>
+        <div><b>M.Sc., Water &amp; Wastewater Engineering</b><span>University of Tehran · 2011–2014</span></div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="eyebrow">Toolkit</div>
+      <h2>Skills</h2>
+      <div class="skills">
+        <div><h3>Machine learning</h3><div class="chips">
+          <span>PyTorch</span><span>TensorFlow</span><span>scikit-learn</span><span>ML emulators</span><span>Surrogate-based optimization</span><span>Federated learning</span><span>Uncertainty quantification</span><span>Causal inference</span><span>Data assimilation</span><span>Time-series forecasting</span>
+        </div></div>
+        <div><h3>Programming &amp; data</h3><div class="chips">
+          <span>Python</span><span>NumPy</span><span>pandas</span><span>Xarray</span><span>Dask</span><span>MATLAB</span><span>R</span><span>SQL</span><span>Rasterio</span><span>GDAL</span><span>GeoPandas</span><span>Shapely</span>
+        </div></div>
+        <div><h3>Computing &amp; workflow</h3><div class="chips">
+          <span>HPC</span><span>Parallel &amp; distributed computing</span><span>PBS</span><span>Git</span><span>Automated testing</span><span>Jupyter</span><span>Plotly dashboards</span><span>LaTeX</span><span>AWS</span><span>Azure</span>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <div class="eyebrow">Peer-reviewed</div>
+      <h2>Publications</h2>
+      <ol class="pubs">
+        <li><span class="yr">2026</span><div>
+          <div class="t">Evolutionary particle filter data assimilation with a complex process-based hydrologic model for enhancing streamflow prediction</div>
+          <div class="a">Rezaei, F., <strong>Farahani, M. A.</strong>, Wood, A. W., Mizukami, N., Moradkhani, H.</div>
+          <div class="j">Water Resources Research (in press)</div></div></li>
+        <li><span class="yr">2025</span><div>
+          <div class="t">Calibrating a large-domain land/hydrology process model in the age of AI: the SUMMA CAMELS emulator experiments</div>
+          <div class="a"><strong>Farahani, M. A.</strong>, Wood, A. W., Tang, G., Mizukami, N.</div>
+          <div class="j">Hydrology and Earth System Sciences, 29(18), 4515–4537</div>
+          <a class="doi" href="https://doi.org/10.5194/hess-29-4515-2025" target="_blank" rel="noopener">doi:10.5194/hess-29-4515-2025</a></div></li>
+        <li><span class="yr">2024</span><div>
+          <div class="t">Causal drivers of land–atmosphere carbon fluxes from machine learning models and data</div>
+          <div class="a"><strong>Farahani, M. A.</strong>, Goodwell, A. E.</div>
+          <div class="j">Journal of Geophysical Research: Biogeosciences, 129(6), e2023JG007815</div>
+          <a class="doi" href="https://doi.org/10.1029/2023JG007815" target="_blank" rel="noopener">doi:10.1029/2023JG007815</a></div></li>
+        <li><span class="yr">2022</span><div>
+          <div class="t">Evaluating ecohydrological model sensitivity to input variability with an information-theory-based approach</div>
+          <div class="a"><strong>Farahani, M. A.</strong>, Vahid, A., Goodwell, A. E.</div>
+          <div class="j">Entropy, 24(7), 994</div>
+          <a class="doi" href="https://doi.org/10.3390/e24070994" target="_blank" rel="noopener">doi:10.3390/e24070994</a></div></li>
+        <li><span class="yr">2020</span><div>
+          <div class="t">Information flows: characterizing precipitation–streamflow dependencies in the Colorado Headwaters with an information theory approach</div>
+          <div class="a">Franzen, S. E., <strong>Farahani, M. A.</strong>, Goodwell, A. E.</div>
+          <div class="j">Water Resources Research, 56(10), e2019WR026133</div>
+          <a class="doi" href="https://doi.org/10.1029/2019WR026133" target="_blank" rel="noopener">doi:10.1029/2019WR026133</a></div></li>
+        <li><span class="yr">2018</span><div>
+          <div class="t">Examining the influence of data uncertainty and hydraulic simulation method on the results of modeling and performance evaluation of water distribution networks</div>
+          <div class="a"><strong>Farahani, M. A.</strong>, Tabesh, M., Shirzad, A.</div>
+          <div class="j">Water and Wastewater, 33–50</div>
+          <a class="doi" href="https://doi.org/10.22093/wwj.2018.87938.2417" target="_blank" rel="noopener">doi:10.22093/wwj.2018.87938.2417</a></div></li>
+      </ol>
+      <p class="note">Full and current list on <a href="https://scholar.google.com/citations?user=ynosZ1MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+    </section>
+
+    <section id="code">
+      <div class="eyebrow">Open source</div>
+      <h2>Code</h2>
+      <div class="code">
+        <div class="repo">
+          <span class="path">github.com/MozhganFarahani</span>
+          <p>My research GitHub, with code from my work at NCAR.</p>
+          <a href="https://github.com/MozhganFarahani" target="_blank" rel="noopener">View profile →</a>
+          <span class="lang">Research · Python · MATLAB</span>
+        </div>
+        <div class="repo">
+          <span class="path">github.com/MozhFarahani</span>
+          <p>My personal GitHub, with this website and personal projects.</p>
+          <a href="https://github.com/MozhFarahani" target="_blank" rel="noopener">View profile →</a>
+          <span class="lang">Personal</span>
+        </div>
+        <div class="repo">
+          <span class="path">github.com/NCAR/pyTIER</span>
+          <p>Topographically InformEd Regression for gridding station precipitation and temperature, in Python.</p>
+          <a href="https://github.com/NCAR/pyTIER" target="_blank" rel="noopener">View repository →</a>
+          <span class="lang">Python · also archived on Zenodo</span>
+        </div>
+        <div class="repo">
+          <span class="path">CTSM-CONUS repository</span>
+          <p>Case-creation scripts, configuration archive, evaluation pipeline, and automated tests for the CONUS experiments.</p>
+          <a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project page →</a>
+          <span class="lang">Python · Xarray · Dask · PBS</span>
+        </div>
+        <div class="repo todo">
+          <span class="path">Coming next</span>
+          <p>Repositories for the emulator calibration workflow and the gauge diagnostics dashboards, once they are public.</p>
+          <span class="lang">Placeholder: add links when released</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="future">
+      <div class="eyebrow">What's next</div>
+      <h2>Future work &amp; collaboration</h2>
+      <p style="margin-bottom:22px">These are directions I want to pursue. If one overlaps with your work, I would like to hear from you.</p>
+      <div class="ideas">
+        <div class="idea">
+          <h3>ML emulators for CTSM calibration at CONUS scale</h3><span class="who">Seeking: land modelers, ML researchers</span>
+          <p>Carry the SUMMA emulator approach into CTSM-CONUS so a full land model can be calibrated against thousands of gauges, and test whether calibrated parameters transfer across configurations such as irrigation and hillslope hydrology.</p>
+        </div>
+        <div class="idea">
+          <h3>Federated learning across agencies</h3><span class="who">Seeking: water agencies, data holders</span>
+          <p>Train regional hydrologic emulators where data cannot be pooled in one place, and measure how much a shared global model gains from regional partners.</p>
+        </div>
+        <div class="idea">
+          <h3>Where does S2S streamflow skill come from?</h3><span class="who">Seeking: forecasters, DA groups</span>
+          <p>Use information-theory diagnostics to separate predictability carried by snowpack, soil moisture, and forcings, and connect that to data assimilation choices.</p>
+        </div>
+        <div class="idea">
+          <h3>Open gauge-level benchmarking</h3><span class="who">Seeking: model developers</span>
+          <p>Turn the diagnostics dashboards into a shared benchmark so any model configuration can be scored against the same gauges, signatures, and failure flags.</p>
+        </div>
+      </div>
+      <div class="collab">
+        <h3>Ways to work together</h3>
+        <ul>
+          <li>Co-authored research and joint proposals</li>
+          <li>Mentoring students and early-career scientists</li>
+          <li>Contributions to open hydrology and land-modeling code</li>
+          <li>Invited talks, seminars, and review panels</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="personal">
+      <div class="eyebrow">Beyond work</div>
+      <h2>Personal projects</h2>
+      <div class="code">
+        <div class="repo todo">
+          <span class="path">Your project name</span>
+          <p>Use this space for side projects, hobbies, teaching, writing, or anything else you want people to know about. One short paragraph and a link works well.</p>
+          <span class="lang">Placeholder: edit before publishing</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="eyebrow">Get in touch</div>
+      <h2>Contact</h2>
+      <div class="contact">
+        <div class="row"><code id="mail">askarzadeh.mozhgan@gmail.com</code><button class="btn" type="button" id="copy">Copy email</button></div>
+        <div class="links">
+          <a href="https://github.com/MozhganFarahani" target="_blank" rel="noopener">github.com/MozhganFarahani (research)</a>
+          <a href="https://github.com/MozhFarahani" target="_blank" rel="noopener">github.com/MozhFarahani (personal)</a>
+          <a href="https://www.linkedin.com/in/mozhganafarahani/" target="_blank" rel="noopener">linkedin.com/in/mozhganafarahani</a>
+          <a href="https://scholar.google.com/citations?user=ynosZ1MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>Mozhgan A. Farahani · Updated October 2026</footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  // Illustrative hydrograph: baseflow, winter storms, spring snowmelt peak
+  var W=720,H=170,L=34,R=8,T=10,B=24,n=365;
+  function q(d){
+    var base=1.2+0.3*Math.cos((d-120)/365*2*Math.PI);
+    var melt=9*Math.exp(-Math.pow((d-245)/26,2))+3.5*Math.exp(-Math.pow((d-215)/18,2));
+    var storms=[[22,2.4],[58,1.6],[140,1.2],[178,1.9],[300,2.8],[330,1.5]].reduce(function(s,p){
+      return s+(d>=p[0]?p[1]*Math.exp(-(d-p[0])/4):0);},0);
+    return base+melt+storms;
+  }
+  var max=0,vals=[];for(var d=0;d<n;d++){var v=q(d);vals.push(v);if(v>max)max=v;}
+  max=Math.ceil(max/4)*4;
+  var x=function(d){return L+(W-L-R)*d/(n-1)}, y=function(v){return T+(H-T-B)*(1-v/max)};
+  var p=vals.map(function(v,i){return (i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)}).join(' ');
+  var flow=document.getElementById('flow'),fill=document.getElementById('fill');
+  flow.setAttribute('d',p);
+  fill.setAttribute('d',p+' L'+x(n-1)+' '+y(0)+' L'+x(0)+' '+y(0)+' Z');
+  try{flow.style.setProperty('--len',flow.getTotalLength());}catch(e){}
+  var ns='http://www.w3.org/2000/svg',grid=document.getElementById('grid'),ax=document.getElementById('axis');
+  for(var k=0;k<=max;k+=4){
+    var ln=document.createElementNS(ns,'line');
+    ln.setAttribute('x1',L);ln.setAttribute('x2',W-R);ln.setAttribute('y1',y(k));ln.setAttribute('y2',y(k));
+    ln.setAttribute('stroke','var(--rule)');ln.setAttribute('stroke-width','1');grid.appendChild(ln);
+    var t=document.createElementNS(ns,'text');t.setAttribute('x',L-6);t.setAttribute('y',y(k)+3);
+    t.setAttribute('text-anchor','end');t.textContent=k;ax.appendChild(t);
+  }
+  var months=['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'],starts=[0,31,61,92,123,151,182,212,243,273,304,335];
+  months.forEach(function(m,i){var t=document.createElementNS(ns,'text');t.setAttribute('x',x(starts[i]+15));
+    t.setAttribute('y',H-6);t.setAttribute('text-anchor','middle');t.textContent=m;ax.appendChild(t);});
+  var u=document.createElementNS(ns,'text');u.setAttribute('x',L+4);u.setAttribute('y',T+9);u.textContent='Q (mm/day)';ax.appendChild(u);
+
+  // project filters
+  var btns=document.querySelectorAll('.filters button'),items=document.querySelectorAll('#projlist .proj');
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    btns.forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false')});
+    var f=b.dataset.f;items.forEach(function(it){it.hidden=!(f==='all'||it.dataset.tags.split(' ').indexOf(f)>-1)});
+  })});
+
+  // copy email
+  var c=document.getElementById('copy'),m=document.getElementById('mail');
+  c.addEventListener('click',function(){
+    function sel(){var r=document.createRange();r.selectNodeContents(m);var s=getSelection();s.removeAllRanges();s.addRange(r);c.textContent='Selected, press Ctrl+C';}
+    try{navigator.clipboard.writeText(m.textContent).then(function(){c.textContent='Copied';setTimeout(function(){c.textContent='Copy email'},1600)},sel);}catch(e){sel();}
+  });
+
+  // active section in index
+  var links=document.querySelectorAll('.index nav a');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+      links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)});}})},{rootMargin:'-30% 0px -60% 0px'});
+    document.querySelectorAll('main section').forEach(function(s){io.observe(s)});
+  }
+})();
+</script>
+</body>
+</html>
