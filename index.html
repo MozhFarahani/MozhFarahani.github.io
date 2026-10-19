@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: sticky left index (name + section links) beside a single reading column; stacks on phones. Motif: a water-year hydrograph. */
+/* Layout: sticky left index (name + section links) beside a single reading column; stacks on phones. */
 :root{
   --bg:#f3f6f6;
   --surface:#ffffff;
@@ -59,13 +59,6 @@ p{margin:0;max-width:66ch}
 .hero h1{font-size:clamp(2.1rem,5vw,3.3rem);font-weight:700;letter-spacing:-.01em;max-width:18ch}
 .hero h1 em{font-style:normal;color:var(--river)}
 .hero .lede{margin-top:20px;font-size:1.1rem;color:var(--ink)}
-.hydro{margin-top:30px;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px 18px 10px}
-.hydro svg{display:block;width:100%;height:auto}
-.hydro figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:6px}
-.figures{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-top:18px}
-.figures div{background:var(--surface);padding:14px 16px}
-.figures b{display:block;font-family:var(--display);font-size:1.45rem;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
-.figures span{font-family:var(--mono);font-size:.7rem;color:var(--muted);line-height:1.4;display:block;margin-top:2px}
 /* projects */
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
 .filters button{font-family:var(--mono);font-size:.75rem;background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:99px;padding:5px 12px;cursor:pointer}
@@ -77,15 +70,8 @@ p{margin:0;max-width:66ch}
 .proj p{margin-top:8px;color:var(--ink)}
 .proj .meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-family:var(--mono);font-size:.74rem;align-items:center}
 .tag{color:var(--river);background:var(--river-soft);padding:2px 8px;border-radius:3px}
-.bars{margin:18px 0 4px;display:flex;flex-direction:column;gap:6px;max-width:560px}
-.bar{display:grid;grid-template-columns:150px minmax(0,1fr) 48px;gap:10px;align-items:center;font-family:var(--mono);font-size:.74rem}
-.bar span{color:var(--muted)}
-.bar i{display:block;height:12px;width:calc(var(--v) / 0.25 * 100%);background:var(--rule);border-radius:2px}
-.bar i.hi{background:var(--river)}
-.bar b{font-weight:500;font-variant-numeric:tabular-nums;text-align:right}
 .bars figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:4px}
-@media (max-width:560px){.bar{grid-template-columns:118px minmax(0,1fr) 42px}}
-.status{font-family:var(--mono);font-size:.68rem;color:var(--silt);border:1px solid currentColor;border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:3px;white-space:nowrap}
+@media (max-width:560px){.status{font-family:var(--mono);font-size:.68rem;color:var(--silt);border:1px solid currentColor;border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:3px;white-space:nowrap}
 /* experience */
 .xp{display:flex;flex-direction:column;gap:30px}
 .job header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;align-items:baseline}
@@ -139,8 +125,7 @@ p{margin:0;max-width:66ch}
 .row code{font-family:var(--mono);font-size:.9rem;background:var(--surface);border:1px solid var(--rule);padding:6px 10px;border-radius:4px;user-select:all;word-break:break-all}
 .btn{font-family:var(--mono);font-size:.78rem;background:var(--ink);color:var(--bg);border:0;border-radius:4px;padding:7px 12px;cursor:pointer}
 footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:18px}
-@media (max-width:980px){ .figures{grid-template-columns:repeat(2,minmax(0,1fr))} }
-@media (max-width:860px){
+@media (max-width:980px){ @media (max-width:860px){
   .wrap{grid-template-columns:minmax(0,1fr);gap:36px;padding-block:28px 64px}
   .index{position:static}
   .index nav{flex-direction:row;flex-wrap:wrap;border-left:0;gap:4px 14px}
@@ -154,10 +139,6 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
   .idea{grid-template-columns:minmax(0,1fr)}
   .idea .who{text-align:left}
   body{font-size:16px}
-}
-@media (prefers-reduced-motion:no-preference){
-  #flow{stroke-dasharray:var(--len);stroke-dashoffset:0;animation:draw 2.4s ease-out}
-  @keyframes draw{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
 }
 </style>
 </head>
@@ -192,23 +173,6 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
       <div class="eyebrow">Hydrology · Land modeling · Machine learning</div>
       <h1>Applied ML scientist for land, water, and climate models.</h1>
       <p class="lede">I am a scientist at the National Center for Atmospheric Research. I combine machine learning with physics-based models: ML emulators that calibrate large-domain hydrology models, federated learning across regions, and information theory to test whether a model captures the right relationships and not only good scores. I take that research from idea to scalable, reproducible code on HPC, and my methods are now used in multi-agency projects. This page collects my research, code, publications, and the work I want to do next.</p>
-
-      <figure class="hydro">
-        <svg id="hydro" viewBox="0 0 720 170" role="img" aria-label="Illustrative snowmelt-driven hydrograph across a water year, October to September, peaking in late spring">
-          <g id="grid"></g>
-          <path id="fill" fill="var(--river-soft)" stroke="none"></path>
-          <path id="flow" fill="none" stroke="var(--river)" stroke-width="2"></path>
-          <g id="axis" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--muted)"></g>
-        </svg>
-        <figcaption>Illustrative snowmelt hydrograph, one water year (Oct–Sep). Most of my work is about getting a model to reproduce curves like this one at thousands of gauges.</figcaption>
-      </figure>
-
-      <div class="figures">
-        <div><b>0.30 → 0.76</b><span>median KGE′ across 627 CAMELS basins after emulator calibration</span></div>
-        <div><b>~97,000</b><span>HUC12 subbasins calibrated for CMIP6 LOCA2 projections</span></div>
-        <div><b>2,286</b><span>stream gauges scored in the CTSM-CONUS evaluation</span></div>
-        <div><b>227,000</b><span>river reaches in the 12 km CONUS routing network</span></div>
-      </div>
     </section>
 
     <section id="projects">
@@ -245,14 +209,6 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
             <h3>CTSM-CONUS: high-resolution land and river modeling</h3>
             <p>Which CTSM configuration choices matter most for fine-scale hydrology over the contiguous US? I ran the Community Terrestrial Systems Model (CTSM 5.4, CLM6 physics) coupled to the mizuRoute river model on the NLDAS-2 1/8° grid: 80,439 land cells, 227,247 MERIT-Hydro river reaches, and 38 water years of NLDAS-2 forcing. Each of five configurations changes one option from a control: irrigation, evolving land cover, hillslope hydrology, or prognostic phenology.</p>
             <p>Routed streamflow was scored against 2,286 USGS, USACE, and USBR gauges (monthly NSE, KGE, percent bias). Hillslope hydrology is the only option that changes skill substantially, roughly doubling median NSE, with the largest gains across the West and the Missouri basin. The work is a two-month Science Innovation Fund (SIF-T) project with Andy Wood, Sean Swenson, and Naoki Mizukami, published as a project website, an interactive dashboard, a Jupyter Book technical note, and a code repository.</p>
-            <figure class="bars" aria-label="Median monthly NSE across 2,286 gauges by CTSM configuration">
-              <div class="bar"><span>Hillslope hydrology</span><i style="--v:0.215" class="hi"></i><b>0.215</b></div>
-              <div class="bar"><span>Control</span><i style="--v:0.098"></i><b>0.098</b></div>
-              <div class="bar"><span>Irrigation</span><i style="--v:0.095"></i><b>0.095</b></div>
-              <div class="bar"><span>Evolving land cover</span><i style="--v:0.086"></i><b>0.086</b></div>
-              <div class="bar"><span>Prognostic phenology</span><i style="--v:0.060"></i><b>0.060</b></div>
-              <figcaption>Median monthly NSE across 2,286 gauges, water years 1981–2018. No calibration.</figcaption>
-            </figure>
             <div class="meta"><span class="tag">CTSM</span><span class="tag">mizuRoute</span><span class="tag">Xarray · Dask</span><a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project site →</a><a href="https://github.com/MozhganFarahani/ctsm_conus" target="_blank" rel="noopener">Code →</a></div>
           </div>
         </article>
@@ -493,9 +449,7 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
       <h2>Personal projects</h2>
       <div class="code">
         <div class="repo todo">
-          <span class="path">Your project name</span>
           <p>Coming soon.</p>
-          <span class="lang">Placeholder: edit before publishing</span>
         </div>
       </div>
     </section>
@@ -504,7 +458,7 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
       <div class="eyebrow">Get in touch</div>
       <h2>Contact</h2>
       <div class="contact">
-        <div class="row"><code id="mail">mozhgana@ucar.edu</code><button class="btn" type="button" id="copy">Copy email</button></div>
+        <div class="row"><code id="mail">askarzadeh.mozhgan@gmail.com</code><button class="btn" type="button" id="copy">Copy email</button></div>
         <div class="links">
           <a href="https://github.com/MozhganFarahani" target="_blank" rel="noopener">github.com/MozhganFarahani (research)</a>
           <a href="https://github.com/MozhFarahani" target="_blank" rel="noopener">github.com/MozhFarahani (personal)</a>
@@ -520,36 +474,6 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
 
 <script>
 (function(){
-  // Illustrative hydrograph: baseflow, winter storms, spring snowmelt peak
-  var W=720,H=170,L=34,R=8,T=10,B=24,n=365;
-  function q(d){
-    var base=1.2+0.3*Math.cos((d-120)/365*2*Math.PI);
-    var melt=9*Math.exp(-Math.pow((d-245)/26,2))+3.5*Math.exp(-Math.pow((d-215)/18,2));
-    var storms=[[22,2.4],[58,1.6],[140,1.2],[178,1.9],[300,2.8],[330,1.5]].reduce(function(s,p){
-      return s+(d>=p[0]?p[1]*Math.exp(-(d-p[0])/4):0);},0);
-    return base+melt+storms;
-  }
-  var max=0,vals=[];for(var d=0;d<n;d++){var v=q(d);vals.push(v);if(v>max)max=v;}
-  max=Math.ceil(max/4)*4;
-  var x=function(d){return L+(W-L-R)*d/(n-1)}, y=function(v){return T+(H-T-B)*(1-v/max)};
-  var p=vals.map(function(v,i){return (i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)}).join(' ');
-  var flow=document.getElementById('flow'),fill=document.getElementById('fill');
-  flow.setAttribute('d',p);
-  fill.setAttribute('d',p+' L'+x(n-1)+' '+y(0)+' L'+x(0)+' '+y(0)+' Z');
-  try{flow.style.setProperty('--len',flow.getTotalLength());}catch(e){}
-  var ns='http://www.w3.org/2000/svg',grid=document.getElementById('grid'),ax=document.getElementById('axis');
-  for(var k=0;k<=max;k+=4){
-    var ln=document.createElementNS(ns,'line');
-    ln.setAttribute('x1',L);ln.setAttribute('x2',W-R);ln.setAttribute('y1',y(k));ln.setAttribute('y2',y(k));
-    ln.setAttribute('stroke','var(--rule)');ln.setAttribute('stroke-width','1');grid.appendChild(ln);
-    var t=document.createElementNS(ns,'text');t.setAttribute('x',L-6);t.setAttribute('y',y(k)+3);
-    t.setAttribute('text-anchor','end');t.textContent=k;ax.appendChild(t);
-  }
-  var months=['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'],starts=[0,31,61,92,123,151,182,212,243,273,304,335];
-  months.forEach(function(m,i){var t=document.createElementNS(ns,'text');t.setAttribute('x',x(starts[i]+15));
-    t.setAttribute('y',H-6);t.setAttribute('text-anchor','middle');t.textContent=m;ax.appendChild(t);});
-  var u=document.createElementNS(ns,'text');u.setAttribute('x',L+4);u.setAttribute('y',T+9);u.textContent='Q (mm/day)';ax.appendChild(u);
-
   // project filters
   var btns=document.querySelectorAll('.filters button'),items=document.querySelectorAll('#projlist .proj');
   btns.forEach(function(b){b.addEventListener('click',function(){
