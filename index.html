@@ -77,6 +77,14 @@ p{margin:0;max-width:66ch}
 .proj p{margin-top:8px;color:var(--ink)}
 .proj .meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-family:var(--mono);font-size:.74rem;align-items:center}
 .tag{color:var(--river);background:var(--river-soft);padding:2px 8px;border-radius:3px}
+.bars{margin:18px 0 4px;display:flex;flex-direction:column;gap:6px;max-width:560px}
+.bar{display:grid;grid-template-columns:150px minmax(0,1fr) 48px;gap:10px;align-items:center;font-family:var(--mono);font-size:.74rem}
+.bar span{color:var(--muted)}
+.bar i{display:block;height:12px;width:calc(var(--v) / 0.25 * 100%);background:var(--rule);border-radius:2px}
+.bar i.hi{background:var(--river)}
+.bar b{font-weight:500;font-variant-numeric:tabular-nums;text-align:right}
+.bars figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:4px}
+@media (max-width:560px){.bar{grid-template-columns:118px minmax(0,1fr) 42px}}
 .status{font-family:var(--mono);font-size:.68rem;color:var(--silt);border:1px solid currentColor;border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:3px;white-space:nowrap}
 /* experience */
 .xp{display:flex;flex-direction:column;gap:30px}
@@ -198,7 +206,7 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
       <div class="figures">
         <div><b>0.30 → 0.76</b><span>median KGE′ across 627 CAMELS basins after emulator calibration</span></div>
         <div><b>~97,000</b><span>HUC12 subbasins calibrated for CMIP6 LOCA2 projections</span></div>
-        <div><b>2,200+</b><span>stream gauges scored in the CTSM-CONUS evaluation</span></div>
+        <div><b>2,286</b><span>stream gauges scored in the CTSM-CONUS evaluation</span></div>
         <div><b>227,000</b><span>river reaches in the 12 km CONUS routing network</span></div>
       </div>
     </section>
@@ -232,12 +240,20 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           </div>
         </article>
         <article class="proj" data-tags="hpc tools">
-          <div class="when">2026</div>
+          <div class="when">Aug–Sep 2026</div>
           <div>
             <h3>CTSM-CONUS: high-resolution land and river modeling</h3>
-            <p>A high-resolution CTSM hydrology evaluation and community baseline dataset for the contiguous US. It couples the Community Terrestrial Systems Model (CTSM 5.4) with the mizuRoute river model on a 0.125° (~12 km) grid of 224 × 464 cells, with 227,000 river reaches and 38 water years, to isolate how irrigation, evolving land cover, hillslope hydrology, and prognostic phenology affect streamflow.</p>
-            <p>A parallel Python pipeline scores five model configurations against 2,200+ stream gauges (NSE, KGE, percent bias) by region. I built the project website, an interactive dashboard of gauge maps, time series, seasonal climatologies, and configuration differences, and an online technical note. Case-creation scripts, the configuration archive, and automated tests are released as an open-source repository. Funded by an NCAR CGD Science Innovation Fund (SIF-T) award.</p>
-            <div class="meta"><span class="tag">CTSM</span><span class="tag">mizuRoute</span><span class="tag">Xarray · Dask</span><a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project site →</a></div>
+            <p>Which CTSM configuration choices matter most for fine-scale hydrology over the contiguous US? I ran the Community Terrestrial Systems Model (CTSM 5.4, CLM6 physics) coupled to the mizuRoute river model on the NLDAS-2 1/8° grid: 80,439 land cells, 227,247 MERIT-Hydro river reaches, and 38 water years of NLDAS-2 forcing. Each of five configurations changes one option from a control: irrigation, evolving land cover, hillslope hydrology, or prognostic phenology.</p>
+            <p>Routed streamflow was scored against 2,286 USGS, USACE, and USBR gauges (monthly NSE, KGE, percent bias). Hillslope hydrology is the only option that changes skill substantially, roughly doubling median NSE, with the largest gains across the West and the Missouri basin. The work is a two-month Science Innovation Fund (SIF-T) project with Andy Wood, Sean Swenson, and Naoki Mizukami, published as a project website, an interactive dashboard, a Jupyter Book technical note, and a code repository.</p>
+            <figure class="bars" aria-label="Median monthly NSE across 2,286 gauges by CTSM configuration">
+              <div class="bar"><span>Hillslope hydrology</span><i style="--v:0.215" class="hi"></i><b>0.215</b></div>
+              <div class="bar"><span>Control</span><i style="--v:0.098"></i><b>0.098</b></div>
+              <div class="bar"><span>Irrigation</span><i style="--v:0.095"></i><b>0.095</b></div>
+              <div class="bar"><span>Evolving land cover</span><i style="--v:0.086"></i><b>0.086</b></div>
+              <div class="bar"><span>Prognostic phenology</span><i style="--v:0.060"></i><b>0.060</b></div>
+              <figcaption>Median monthly NSE across 2,286 gauges, water years 1981–2018. No calibration.</figcaption>
+            </figure>
+            <div class="meta"><span class="tag">CTSM</span><span class="tag">mizuRoute</span><span class="tag">Xarray · Dask</span><a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project site →</a><a href="https://github.com/MozhganFarahani/ctsm_conus" target="_blank" rel="noopener">Code →</a></div>
           </div>
         </article>
         <article class="proj" data-tags="tools">
@@ -427,10 +443,10 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           <span class="lang">Python · also archived on Zenodo</span>
         </div>
         <div class="repo">
-          <span class="path">CTSM-CONUS repository</span>
-          <p>Case-creation scripts, configuration archive, evaluation pipeline, and automated tests for the CONUS experiments.</p>
-          <a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project page →</a>
-          <span class="lang">Python · Xarray · Dask · PBS</span>
+          <span class="path">MozhganFarahani/ctsm_conus</span>
+          <p>Setup scripts with spinup and evaluation modes, complete CIME case folders, and the analysis and dashboard code for CTSM-CONUS.</p>
+          <a href="https://github.com/MozhganFarahani/ctsm_conus" target="_blank" rel="noopener">View repository →</a>
+          <span class="lang">CTSM · mizuRoute · Python</span>
         </div>
       </div>
     </section>
@@ -441,8 +457,16 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
       <p style="margin-bottom:22px">These are directions I want to pursue. If one overlaps with your work, I would like to hear from you.</p>
       <div class="ideas">
         <div class="idea">
-          <h3>ML emulators for CTSM calibration at CONUS scale</h3><span class="who">Seeking: land modelers, ML researchers</span>
-          <p>Carry the SUMMA emulator approach into CTSM-CONUS so a full land model can be calibrated against thousands of gauges, and test whether calibrated parameters transfer across configurations such as irrigation and hillslope hydrology.</p>
+          <h3>Calibrate CTSM hydrology, starting with snow</h3><span class="who">Seeking: land modelers, snow scientists</span>
+          <p>In CTSM-CONUS, snow-fed Rocky Mountain basins peak about a month early and run nearly dry by July. I want to evaluate snow water equivalent and melt timing against observations, then carry my SUMMA emulator calibration approach over to CTSM.</p>
+        </div>
+        <div class="idea">
+          <h3>Why does CTSM over-predict the Missouri?</h3><span class="who">Seeking: Missouri basin experts, forcing-data groups</span>
+          <p>All 22 naturalized mainstem gauges over-predict flow, by up to +135% at the Dakota reservoirs. A basin precipitation and evapotranspiration budget should show whether forcings or parameters are responsible.</p>
+        </div>
+        <div class="idea">
+          <h3>A CONUS baseline for the community</h3><span class="who">Seeking: hydrologic model users</span>
+          <p>Release the CTSM-CONUS runs as baseline datasets with a DOI, add daily routed flow and gridded dashboard layers, and bring in observations for snow, evapotranspiration, and soil moisture so other groups can choose configurations for their own basins.</p>
         </div>
         <div class="idea">
           <h3>Federated learning across agencies</h3><span class="who">Seeking: water agencies, data holders</span>
@@ -451,10 +475,6 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
         <div class="idea">
           <h3>Where does S2S streamflow skill come from?</h3><span class="who">Seeking: forecasters, DA groups</span>
           <p>Use information-theory diagnostics to separate predictability carried by snowpack, soil moisture, and forcings, and connect that to data assimilation choices.</p>
-        </div>
-        <div class="idea">
-          <h3>Open gauge-level benchmarking</h3><span class="who">Seeking: model developers</span>
-          <p>Turn the diagnostics dashboards into a shared benchmark so any model configuration can be scored against the same gauges, signatures, and failure flags.</p>
         </div>
       </div>
       <div class="collab">
