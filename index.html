@@ -99,6 +99,13 @@ p{margin:0;max-width:66ch}
 .skills h3{font-size:1rem;font-weight:700;margin-bottom:10px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{font-family:var(--mono);font-size:.74rem;border:1px solid var(--rule);background:var(--surface);border-radius:3px;padding:3px 8px}
+.certs{margin-top:36px}
+.certs h3{font-size:1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.certs h3 small{font-family:var(--mono);font-size:.72rem;font-weight:400;color:var(--muted)}
+.certs ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px;border-top:1px solid var(--rule)}
+.certs li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:.95rem;min-width:0}
+.certs time{font-family:var(--mono);font-size:.74rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:860px){.certs ul{grid-template-columns:minmax(0,1fr)}}
 /* pubs */
 .pubs{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:20px}
 .pubs li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px}
@@ -115,7 +122,6 @@ p{margin:0;max-width:66ch}
 .repo .path{font-family:var(--mono);font-size:.82rem;color:var(--river);word-break:break-all}
 .repo p{font-size:.95rem}
 .repo .lang{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:auto}
-.repo.todo{background:transparent;border-style:dashed;grid-column:1/-1}
 /* future */
 .ideas{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
 .idea{padding:20px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px}
@@ -127,6 +133,10 @@ p{margin:0;max-width:66ch}
 .collab ul{margin:0;padding-left:1.1em;max-width:66ch}
 .collab li{margin-top:4px}
 .note{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-top:14px;max-width:66ch}
+/* personal */
+.life{display:flex;flex-direction:column;gap:12px}
+.life p{font-size:1.1rem}
+.life .langs{font-family:var(--mono);font-size:.78rem;color:var(--muted);letter-spacing:.02em}
 /* contact */
 .contact{display:flex;flex-direction:column;gap:12px}
 .row{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
@@ -182,7 +192,7 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
     <section id="about" class="hero">
       <div class="eyebrow">Hydrology · Land modeling · Machine learning · Information theory</div>
       <h1>Applied ML scientist for land, water, and climate models.</h1>
-      <p class="lede">I am a scientist at the National Center for Atmospheric Research with a Ph.D. and 7 years of experience combining machine learning with physics-based models of land, water, and climate. My work runs from research to reliable code: surrogate modeling and optimization, federated learning, causal inference, and uncertainty quantification, built into end-to-end pipelines for training, inference, and evaluation on high-performance computing. My methods are now used in multi-agency projects, and I work closely with domain experts and partner teams, explaining results clearly to technical and non-technical audiences. This page collects my research, code, and publications.</p>
+      <p class="lede">I am a scientist at the National Center for Atmospheric Research with a Ph.D. and 7 years of experience combining machine learning with physics-based models of land, water, and climate. My work runs from research to reliable code: surrogate modeling and optimization, federated learning, causal inference, and uncertainty quantification, built into end-to-end pipelines for training, inference, and evaluation on high-performance computing. My methods are now used in multi-agency projects, and I work closely with domain experts and partner teams, explaining results clearly to technical and non-technical audiences. Looking ahead, I am most interested in physics-informed and hybrid models, where machine learning and physics-based models learn together, and in using information theory to understand what these models learn and why.</p>
     </section>
 
     <section id="projects">
@@ -356,8 +366,17 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           <span>Python</span><span>NumPy</span><span>pandas</span><span>Xarray</span><span>Dask</span><span>MATLAB</span><span>R</span><span>SQL</span><span>Rasterio</span><span>GDAL</span><span>GeoPandas</span><span>Shapely</span>
         </div></div>
         <div><h3>Computing &amp; workflow</h3><div class="chips">
-          <span>HPC</span><span>Parallel &amp; distributed computing</span><span>PBS</span><span>Git</span><span>Automated testing</span><span>Jupyter</span><span>Plotly dashboards</span><span>AI-assisted development (Claude)</span><span>LaTeX</span><span>AWS</span><span>Azure</span>
+          <span>HPC</span><span>Parallel &amp; distributed computing</span><span>PBS</span><span>Linux</span><span>Git</span><span>Automated testing</span><span>Jupyter</span><span>Plotly dashboards</span><span>AI-assisted development (Claude)</span><span>LaTeX</span><span>AWS</span><span>Azure</span>
         </div></div>
+      </div>
+      <div class="certs">
+        <h3>Certifications <small>LinkedIn Learning</small></h3>
+        <ul>
+          <li><span>Advanced Geospatial Data Analytics in Python</span><time>Sep 2025</time></li>
+          <li><span>Geospatial Data Analytics Essential Training</span><time>Feb 2025</time></li>
+          <li><span>Learning Linux Command Line</span><time>Nov 2023</time></li>
+          <li><span>SQL for Data Analysis</span><time>Nov 2022</time></li>
+        </ul>
       </div>
     </section>
 
@@ -443,11 +462,10 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
 
     <section id="personal">
       <div class="eyebrow">Beyond work</div>
-      <h2>Personal projects</h2>
-      <div class="code">
-        <div class="repo todo">
-          <p>Coming soon.</p>
-        </div>
+      <h2>Personal</h2>
+      <div class="life">
+        <p>Outside work, I paint and play volleyball. I used to be a basketball player, and I still love watching the game.</p>
+        <p class="langs">Languages · Farsi (native), English</p>
       </div>
     </section>
 
