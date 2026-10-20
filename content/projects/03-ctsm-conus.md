@@ -11,6 +11,8 @@ tags:
 links:
 - label: Project site
   url: https://project.cgd.ucar.edu/projects/ctsm-conus
+- label: Technical note
+  url: https://project.cgd.ucar.edu/projects/ctsm-conus/note/
 - label: Code
   url: https://github.com/MozhganFarahani/ctsm_conus
 ---
