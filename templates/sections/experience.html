@@ -1,0 +1,20 @@
+    <section id="experience">
+      {% if sec.eyebrow %}<div class="eyebrow">{{ sec.eyebrow }}</div>{% endif %}
+      <h2>{{ sec.title }}</h2>
+      <div class="xp">
+        {% for j in sec.entries %}
+        <div class="job">
+          <header><h3>{{ j.title }}</h3><span class="dates">{{ j.dates }}</span></header>
+          {% if j.note %}<div class="sub">{{ j.note }}</div>{% endif %}
+          <div class="org">{{ j.org }}</div>
+          {{ j.body }}
+        </div>
+        {% endfor %}
+      </div>
+      {% if sec.education %}
+      <div class="edu">
+        {% for e in sec.education %}<div><b>{{ e.degree }}</b><span>{{ e.school }}</span></div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </section>

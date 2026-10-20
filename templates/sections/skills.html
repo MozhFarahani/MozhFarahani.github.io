@@ -1,0 +1,21 @@
+    <section id="skills">
+      {% if sec.eyebrow %}<div class="eyebrow">{{ sec.eyebrow }}</div>{% endif %}
+      <h2>{{ sec.title }}</h2>
+      <div class="skills">
+        {% for g in sec.groups or [] %}
+        <div><h3>{{ g.name }}</h3><div class="chips">
+          {% for i in g['items'] %}<span>{{ i }}</span>{% endfor %}
+        </div></div>
+        {% endfor %}
+      </div>
+      {% set c = sec.certifications %}
+      {% if c and c['items'] %}
+      <div class="certs">
+        <h3>{{ c.title or "Certifications" }}{% if c.source %} <small>{{ c.source }}</small>{% endif %}</h3>
+        <ul>
+          {% for i in c['items'] %}<li><span>{{ i.title }}</span><time>{{ i.date }}</time></li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </section>

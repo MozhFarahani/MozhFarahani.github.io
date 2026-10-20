@@ -1,0 +1,15 @@
+    <section id="publications">
+      {% if sec.eyebrow %}<div class="eyebrow">{{ sec.eyebrow }}</div>{% endif %}
+      <h2>{{ sec.title }}</h2>
+      <ol class="pubs">
+        {% for p in sec.publications or [] %}
+        <li><span class="yr">{{ p.year }}</span><div>
+          <div class="t">{{ p.title }}</div>
+          <div class="a">{{ p.authors | mdi }}</div>
+          <div class="j">{{ p.journal }}</div>
+          {% if p.doi or p.code %}<div class="pl">{% if p.doi %}<a class="doi" href="https://doi.org/{{ p.doi }}" target="_blank" rel="noopener">doi:{{ p.doi }}</a>{% endif %}{% if p.doi and p.code %} · {% endif %}{% if p.code %}<a class="doi" href="{{ p.code }}" target="_blank" rel="noopener">code</a>{% endif %}</div>{% endif %}
+        </div></li>
+        {% endfor %}
+      </ol>
+      {% if sec.body %}<div class="note">{{ sec.body }}</div>{% endif %}
+    </section>

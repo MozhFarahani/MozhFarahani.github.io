@@ -1,0 +1,14 @@
+    <section id="code">
+      {% if sec.eyebrow %}<div class="eyebrow">{{ sec.eyebrow }}</div>{% endif %}
+      <h2>{{ sec.title }}</h2>
+      <div class="code">
+        {% for r in sec.repos or [] %}
+        <div class="repo">
+          <span class="path">{{ r.name }}</span>
+          <p>{{ r.description }}</p>
+          <a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.link_label or "View repository" }} →</a>
+          {% if r.note %}<span class="lang">{{ r.note }}</span>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </section>

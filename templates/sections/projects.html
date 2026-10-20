@@ -1,0 +1,23 @@
+    <section id="projects">
+      {% if sec.eyebrow %}<div class="eyebrow">{{ sec.eyebrow }}</div>{% endif %}
+      <h2>{{ sec.title }}</h2>
+      {% if sec.filters %}
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+        {% for f in sec.filters %}<button type="button" data-f="{{ f.key }}">{{ f.label }}</button>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="projects" id="projlist">
+        {% for p in sec.entries %}
+        <article class="proj" data-tags="{{ (p.filters or []) | join(' ') }}">
+          <div class="when">{{ p.when }}</div>
+          <div>
+            <h3>{{ p.title }}{% if p.status %} <span class="status">{{ p.status }}</span>{% endif %}</h3>
+            {{ p.body }}
+            {% if p.tags or p.links %}<div class="meta">{% for t in p.tags or [] %}<span class="tag">{{ t }}</span>{% endfor %}{% for l in p.links or [] %}<a href="{{ l.url }}"{% if not l.url.startswith('#') %} target="_blank" rel="noopener"{% endif %}>{{ l.label }} →</a>{% endfor %}</div>{% endif %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>

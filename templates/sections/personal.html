@@ -1,0 +1,8 @@
+    <section id="personal">
+      {% if sec.eyebrow %}<div class="eyebrow">{{ sec.eyebrow }}</div>{% endif %}
+      <h2>{{ sec.title }}</h2>
+      <div class="life">
+        {{ sec.body }}
+        {% if sec.languages %}<p class="langs">Languages · {{ sec.languages }}</p>{% endif %}
+      </div>
+    </section>

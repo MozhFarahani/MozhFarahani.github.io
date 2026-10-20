@@ -1,0 +1,11 @@
+    <section id="contact">
+      {% if sec.eyebrow %}<div class="eyebrow">{{ sec.eyebrow }}</div>{% endif %}
+      <h2>{{ sec.title }}</h2>
+      <div class="contact">
+        {% if sec.email %}<div class="row"><code id="mail">{{ sec.email }}</code><button class="btn" type="button" id="copy">Copy email</button></div>{% endif %}
+        <div class="links">
+          {% for l in sec.links or [] %}<a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>

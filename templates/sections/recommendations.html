@@ -1,0 +1,16 @@
+    <section id="recommendations">
+      {% if sec.eyebrow %}<div class="eyebrow">{{ sec.eyebrow }}</div>{% endif %}
+      <h2>{{ sec.title }}</h2>
+      <div class="quotes">
+        {% for r in sec.entries %}
+        <figure class="quote">
+          <blockquote>{{ r.body }}</blockquote>
+          <figcaption>
+            <b>{{ r.name }}</b>
+            {% if r.role %}<span>{{ r.role }}</span>{% endif %}
+            {% if r.link %}<span><a href="{{ r.link.url }}" target="_blank" rel="noopener">{{ r.link.label }} →</a></span>{% endif %}
+          </figcaption>
+        </figure>
+        {% endfor %}
+      </div>
+    </section>
