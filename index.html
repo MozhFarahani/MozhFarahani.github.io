@@ -71,8 +71,7 @@ p{margin:0;max-width:66ch}
 .proj p{margin-top:8px;color:var(--ink)}
 .proj .meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-family:var(--mono);font-size:.74rem;align-items:center}
 .tag{color:var(--river);background:var(--river-soft);padding:2px 8px;border-radius:3px}
-.bars figcaption{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:4px}
-@media (max-width:560px){.status{font-family:var(--mono);font-size:.68rem;color:var(--silt);border:1px solid currentColor;border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:3px;white-space:nowrap}
+.status{font-family:var(--mono);font-size:.68rem;color:var(--silt);border:1px solid currentColor;border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:3px;white-space:nowrap}
 /* recommendation */
 .quote{margin:0;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:26px 28px;display:flex;flex-direction:column;gap:18px}
 .quote blockquote{margin:0;display:flex;flex-direction:column;gap:12px;font-size:1.05rem;max-width:66ch}
@@ -134,7 +133,7 @@ p{margin:0;max-width:66ch}
 .row code{font-family:var(--mono);font-size:.9rem;background:var(--surface);border:1px solid var(--rule);padding:6px 10px;border-radius:4px;user-select:all;word-break:break-all}
 .btn{font-family:var(--mono);font-size:.78rem;background:var(--ink);color:var(--bg);border:0;border-radius:4px;padding:7px 12px;cursor:pointer}
 footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:18px}
-@media (max-width:980px){ @media (max-width:860px){
+@media (max-width:860px){
   .avatar{width:88px;height:88px}
   .wrap{grid-template-columns:minmax(0,1fr);gap:36px;padding-block:28px 64px}
   .index{position:static}
@@ -221,7 +220,7 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           <div>
             <h3>CTSM-CONUS: high-resolution land and river modeling</h3>
             <p>Which CTSM configuration choices matter most for fine-scale hydrology over the contiguous US? I ran the Community Terrestrial Systems Model (CTSM 5.4, CLM6 physics) coupled to the mizuRoute river model on the NLDAS-2 1/8° grid: 80,439 land cells, 227,247 MERIT-Hydro river reaches, and 38 water years of NLDAS-2 forcing. Each of five configurations changes one option from a control: irrigation, evolving land cover, hillslope hydrology, or prognostic phenology.</p>
-            <p>Routed streamflow was scored against 2,286 USGS, USACE, and USBR gauges (monthly NSE, KGE, percent bias). Hillslope hydrology is the only option that changes skill substantially, roughly doubling median NSE, with the largest gains across the West and the Missouri basin. The work is a two-month Science Innovation Fund (SIF-T) project with Andy Wood, Sean Swenson, and Naoki Mizukami, published as a project website, an interactive dashboard, a Jupyter Book technical note, and a code repository.</p>
+            <p>Routed streamflow was scored against 2,286 USGS, USACE, and USBR gauges (monthly NSE, KGE, percent bias). Hillslope hydrology is the only option that changes skill substantially, roughly doubling median NSE, with the largest gains across the West and the Missouri basin. The work is a two-month Science Innovation Fund (SIF-T) project, published as a project website, an interactive dashboard, a Jupyter Book technical note, and a code repository.</p>
             <div class="meta"><span class="tag">CTSM</span><span class="tag">mizuRoute</span><span class="tag">Xarray · Dask</span><a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project site →</a><a href="https://github.com/MozhganFarahani/ctsm_conus" target="_blank" rel="noopener">Code →</a></div>
           </div>
         </article>
