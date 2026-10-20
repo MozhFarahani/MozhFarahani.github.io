@@ -168,7 +168,6 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
       <a href="#skills">Skills</a>
       <a href="#publications">Publications</a>
       <a href="#code">Code</a>
-      <a href="#future">Future work</a>
       <a href="#personal">Personal</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -207,12 +206,13 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
             <div class="meta"><span class="tag">Emulators</span><span class="tag">NSGA-II</span><span class="tag">Federated learning</span><a href="https://doi.org/10.5194/hess-29-4515-2025" target="_blank" rel="noopener">Paper →</a><a href="https://github.com/MozhganFarahani/lse_landhydro" target="_blank" rel="noopener">Code →</a></div>
           </div>
         </article>
-        <article class="proj" data-tags="ml hpc">
+        <article class="proj" data-tags="ml hpc tools">
           <div class="when">Current</div>
           <div>
             <h3>CMIP6 LOCA2 streamflow projections <span class="status">Ongoing</span></h3>
             <p>A multi-agency effort with the Bureau of Reclamation and the U.S. Army Corps of Engineers. I lead the calibration workstream: an end-to-end HPC pipeline that uses the trained emulators to generate parameters for ~97,000 HUC12 subbasins across the contiguous US, runs large simulation ensembles, and automates parameter selection gauge by gauge through the river network. I coordinate region-by-region delivery to partners.</p>
-            <div class="meta"><span class="tag">SUMMA</span><span class="tag">HPC pipelines</span><span class="tag">Ensembles</span></div>
+            <p>For the project team, I built a Python and Plotly tool that turns HPC model output into interactive diagnostic dashboards, with CAMELS-X benchmarking, streamflow signatures, and automated failure flags, to find and diagnose poorly performing gauges.</p>
+            <div class="meta"><span class="tag">SUMMA</span><span class="tag">HPC pipelines</span><span class="tag">Ensembles</span><span class="tag">Plotly dashboards</span></div>
           </div>
         </article>
         <article class="proj" data-tags="hpc tools">
@@ -222,14 +222,6 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
             <p>Which CTSM configuration choices matter most for fine-scale hydrology over the contiguous US? I ran the Community Terrestrial Systems Model (CTSM 5.4, CLM6 physics) coupled to the mizuRoute river model on the NLDAS-2 1/8° grid: 80,439 land cells, 227,247 MERIT-Hydro river reaches, and 38 water years of NLDAS-2 forcing. Each of five configurations changes one option from a control: irrigation, evolving land cover, hillslope hydrology, or prognostic phenology.</p>
             <p>Routed streamflow was scored against 2,286 USGS, USACE, and USBR gauges (monthly NSE, KGE, percent bias). Hillslope hydrology is the only option that changes skill substantially, roughly doubling median NSE, with the largest gains across the West and the Missouri basin. The work is a two-month Science Innovation Fund (SIF-T) project, published as a project website, an interactive dashboard, a Jupyter Book technical note, and a code repository.</p>
             <div class="meta"><span class="tag">CTSM</span><span class="tag">mizuRoute</span><span class="tag">Xarray · Dask</span><a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project site →</a><a href="https://github.com/MozhganFarahani/ctsm_conus" target="_blank" rel="noopener">Code →</a></div>
-          </div>
-        </article>
-        <article class="proj" data-tags="tools">
-          <div class="when">Current</div>
-          <div>
-            <h3>Gauge diagnostics dashboards</h3>
-            <p>A Python and Plotly tool that turns HPC model output into interactive diagnostics: CAMELS-X benchmarking, streamflow signatures, and automated failure flags. The project team uses it to find and diagnose poorly performing gauges.</p>
-            <div class="meta"><span class="tag">Plotly</span><span class="tag">Python</span></div>
           </div>
         </article>
         <article class="proj" data-tags="it">
@@ -442,47 +434,6 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
           <a href="https://github.com/MozhganFarahani/ctsm_conus" target="_blank" rel="noopener">View repository →</a>
           <span class="lang">CTSM · mizuRoute · Python</span>
         </div>
-      </div>
-    </section>
-
-    <section id="future">
-      <div class="eyebrow">What's next</div>
-      <h2>Future work &amp; collaboration</h2>
-      <p style="margin-bottom:22px">These are directions I want to pursue. If one overlaps with your work, I would like to hear from you.</p>
-      <div class="ideas">
-        <div class="idea">
-          <h3>Calibrate CTSM hydrology, starting with snow</h3><span class="who">Seeking: land modelers, snow scientists</span>
-          <p>In CTSM-CONUS, snow-fed Rocky Mountain basins peak about a month early and run nearly dry by July. I want to evaluate snow water equivalent and melt timing against observations, then carry my SUMMA emulator calibration approach over to CTSM.</p>
-        </div>
-        <div class="idea">
-          <h3>Why does CTSM over-predict the Missouri?</h3><span class="who">Seeking: Missouri basin experts, forcing-data groups</span>
-          <p>All 22 naturalized mainstem gauges over-predict flow, by up to +135% at the Dakota reservoirs. A basin precipitation and evapotranspiration budget should show whether forcings or parameters are responsible.</p>
-        </div>
-        <div class="idea">
-          <h3>A CONUS baseline for the community</h3><span class="who">Seeking: hydrologic model users</span>
-          <p>Release the CTSM-CONUS runs as baseline datasets with a DOI, add daily routed flow and gridded dashboard layers, and bring in observations for snow, evapotranspiration, and soil moisture so other groups can choose configurations for their own basins.</p>
-        </div>
-        <div class="idea">
-          <h3>Land and water modeling for West Asia &amp; North Africa</h3><span class="who">Seeking: regional partners, WANA Affinity Group</span>
-          <p>Bring large-domain land and hydrology modeling and ML calibration to a region facing severe water scarcity, building on the collaboration inventory and priorities from the WANA Affinity Group.</p>
-        </div>
-        <div class="idea">
-          <h3>Federated learning across agencies</h3><span class="who">Seeking: water agencies, data holders</span>
-          <p>Train regional hydrologic emulators where data cannot be pooled in one place, and measure how much a shared global model gains from regional partners.</p>
-        </div>
-        <div class="idea">
-          <h3>Where does S2S streamflow skill come from?</h3><span class="who">Seeking: forecasters, DA groups</span>
-          <p>Use information-theory diagnostics to separate predictability carried by snowpack, soil moisture, and forcings, and connect that to data assimilation choices.</p>
-        </div>
-      </div>
-      <div class="collab">
-        <h3>Ways to work together</h3>
-        <ul>
-          <li>Co-authored research and joint proposals</li>
-          <li>Mentoring students and early-career scientists</li>
-          <li>Contributions to open hydrology and land-modeling code</li>
-          <li>Invited talks, seminars, and review panels</li>
-        </ul>
       </div>
     </section>
 
