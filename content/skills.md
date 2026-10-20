@@ -46,6 +46,7 @@ groups:
   - Git
   - Automated testing
   - Jupyter
+  - Jupyter Book
   - Plotly dashboards
   - AI-assisted development (Claude)
   - LaTeX
