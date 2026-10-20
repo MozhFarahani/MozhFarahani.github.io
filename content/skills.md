@@ -48,7 +48,7 @@ groups:
   - Jupyter
   - Jupyter Book
   - Plotly dashboards
-  - AI-assisted development (Claude)
+  - AI-assisted development & project management (Claude)
   - LaTeX
   - AWS
   - Azure
