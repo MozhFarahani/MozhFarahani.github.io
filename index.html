@@ -95,7 +95,7 @@ p{margin:0;max-width:66ch}
 .edu b{font-family:var(--display);display:block}
 .edu span{font-size:.92rem;color:var(--muted)}
 /* skills */
-.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px}
 .skills h3{font-size:1rem;font-weight:700;margin-bottom:10px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips span{font-family:var(--mono);font-size:.74rem;border:1px solid var(--rule);background:var(--surface);border-radius:3px;padding:3px 8px}
@@ -221,6 +221,7 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
             <h3>CTSM-CONUS: high-resolution land and river modeling</h3>
             <p>Which CTSM configuration choices matter most for fine-scale hydrology over the contiguous US? I ran the Community Terrestrial Systems Model (CTSM 5.4, CLM6 physics) coupled to the mizuRoute river model on the NLDAS-2 1/8° grid: 80,439 land cells, 227,247 MERIT-Hydro river reaches, and 38 water years of NLDAS-2 forcing. Each of five configurations changes one option from a control: irrigation, evolving land cover, hillslope hydrology, or prognostic phenology.</p>
             <p>Routed streamflow was scored against 2,286 USGS, USACE, and USBR gauges (monthly NSE, KGE, percent bias). Hillslope hydrology is the only option that changes skill substantially, roughly doubling median NSE, with the largest gains across the West and the Missouri basin. The work is a two-month Science Innovation Fund (SIF-T) project, published as a project website, an interactive dashboard, a Jupyter Book technical note, and a code repository.</p>
+            <p>It was also my first time running CTSM. I used Claude as a working assistant throughout: learning the model with my proposal as context, adapting my SUMMA evaluation code to CTSM and mizuRoute, diagnosing setup and routing errors, keeping a project log, and building the website and dashboard. I reviewed and tested every step like my own code.</p>
             <div class="meta"><span class="tag">CTSM</span><span class="tag">mizuRoute</span><span class="tag">Xarray · Dask</span><a href="https://project.cgd.ucar.edu/projects/ctsm-conus" target="_blank" rel="noopener">Project site →</a><a href="https://github.com/MozhganFarahani/ctsm_conus" target="_blank" rel="noopener">Code →</a></div>
           </div>
         </article>
@@ -345,14 +346,17 @@ footer{font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1p
       <div class="eyebrow">Toolkit</div>
       <h2>Skills</h2>
       <div class="skills">
-        <div><h3>Machine learning</h3><div class="chips">
-          <span>PyTorch</span><span>TensorFlow</span><span>scikit-learn</span><span>ML emulators</span><span>Surrogate-based optimization</span><span>Federated learning</span><span>Uncertainty quantification</span><span>Causal inference</span><span>Data assimilation</span><span>Time-series forecasting</span>
+        <div><h3>Deep learning &amp; AI</h3><div class="chips">
+          <span>PyTorch</span><span>TensorFlow</span><span>CNNs</span><span>LSTMs</span><span>ML emulators for physics-based models</span><span>Federated learning</span>
+        </div></div>
+        <div><h3>Machine learning &amp; statistics</h3><div class="chips">
+          <span>scikit-learn</span><span>XGBoost</span><span>Random forests</span><span>SVMs</span><span>Surrogate-based optimization</span><span>Uncertainty quantification</span><span>Causal inference</span><span>Information theory</span><span>Data assimilation</span><span>Time-series forecasting</span>
         </div></div>
         <div><h3>Programming &amp; data</h3><div class="chips">
           <span>Python</span><span>NumPy</span><span>pandas</span><span>Xarray</span><span>Dask</span><span>MATLAB</span><span>R</span><span>SQL</span><span>Rasterio</span><span>GDAL</span><span>GeoPandas</span><span>Shapely</span>
         </div></div>
         <div><h3>Computing &amp; workflow</h3><div class="chips">
-          <span>HPC</span><span>Parallel &amp; distributed computing</span><span>PBS</span><span>Git</span><span>Automated testing</span><span>Jupyter</span><span>Plotly dashboards</span><span>LaTeX</span><span>AWS</span><span>Azure</span>
+          <span>HPC</span><span>Parallel &amp; distributed computing</span><span>PBS</span><span>Git</span><span>Automated testing</span><span>Jupyter</span><span>Plotly dashboards</span><span>AI-assisted development (Claude)</span><span>LaTeX</span><span>AWS</span><span>Azure</span>
         </div></div>
       </div>
     </section>
