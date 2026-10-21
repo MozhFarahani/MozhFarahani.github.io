@@ -11,4 +11,4 @@ links:
   url: '#publications'
 ---
 
-I developed information-theory metrics that quantify sub-seasonal to seasonal hydrologic predictability. I also supplied the model calibration behind the project's particle-filter data assimilation study.
+I developed information-theory metrics that quantify sub-seasonal to seasonal (S2S) hydrologic predictability. I also supplied the model calibration behind the project's particle-filter data assimilation study.
