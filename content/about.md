@@ -12,7 +12,7 @@ I also bring a background in information theory, the mathematics of how much one
 
 So far, machine learning in my work has supported physics-based models from the outside, helping to calibrate them. Next, I want to bring the two closer together in hybrid and physics-informed models, where machine learning and physics learn together, and to use information theory to understand what these models learn and why.
 
-Outside of work, I paint, play volleyball, and still follow the basketball I used to play.
+Outside of work, I paint, play volleyball, and still follow the basketball which I used to play.
 
 
 
