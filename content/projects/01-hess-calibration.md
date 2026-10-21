@@ -5,8 +5,8 @@ filters:
 - ml
 tags:
 - Emulators
-- NSGA-II
-- Federated learning
+- optimization
+- SUMMA
 links:
 - label: Paper
   url: https://doi.org/10.5194/hess-29-4515-2025
