@@ -39,4 +39,4 @@ publications:
   doi: 10.22093/wwj.2018.87938.2417
 ---
 
-Full and current list on [Google Scholar](https://scholar.google.com/citations?user=ynosZ1MAAAAJ&hl=en).
+A full, current list is on [Google Scholar](https://scholar.google.com/citations?user=ynosZ1MAAAAJ&hl=en).
