@@ -5,7 +5,7 @@ eyebrow: Career
 title: Experience
 education:
 - degree: Ph.D., Civil Engineering Systems
-  school: University of Colorado Denver · 2019–2023
+  school: University of Colorado Denver · Aug 2019 – Dec 2023
 - degree: M.Sc., Water & Wastewater Engineering
-  school: University of Tehran · 2011–2014
+  school: University of Tehran · Sep 2011 – Jan 2014
 ---
