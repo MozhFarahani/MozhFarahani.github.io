@@ -5,7 +5,7 @@ filters:
 - ml
 tags:
 - Emulators
-- optimization
+- Optimization
 - SUMMA
 links:
 - label: Paper
