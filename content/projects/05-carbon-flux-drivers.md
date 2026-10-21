@@ -15,4 +15,4 @@ links:
   url: https://github.com/MozhganFarahani/Farahani_CarbonML2023
 ---
 
-PhD research combining machine learning (linear regression, random forests, LSTM networks) and process-based models with large flux-tower time series. Information-theoretic causal analysis tests whether each model captures the right input–output relationships, not only predictive accuracy.
+Ph.D. research combining machine learning (linear regression, random forests, LSTM) and process-based models with large flux-tower time series. Information-theoretic causal analysis tests whether each model captures the right input–output relationships, not only predictive accuracy.
