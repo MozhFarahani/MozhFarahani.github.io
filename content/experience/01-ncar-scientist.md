@@ -9,5 +9,5 @@ org: National Center for Atmospheric Research (NCAR), Boulder, CO
 - Built the HPC calibration pipeline for CMIP6 LOCA2 streamflow projections with the Bureau of Reclamation and USACE, covering ~97,000 HUC12 subbasins.
 - Led the CTSM-CONUS high-resolution land and river modeling study, its evaluation pipeline, website, dashboard, and open-source release.
 - Quantified S2S hydrologic predictability with information-theory metrics for a NASA-funded project.
-- Member of the WANA Affinity Group; contributed to a PSIF-funded assessment of UCAR/NCAR/UCP collaborations across West Asia and North Africa.
-- Peer reviewer for scientific journals and invited panelist for NASA proposal reviews.
+- Served as a member of the WANA Affinity Group; contributed to a PSIF-funded assessment of UCAR/NCAR/UCP collaborations across West Asia and North Africa.
+- Serve as a Peer reviewer for scientific journals and invited panelist for NASA proposal reviews.
